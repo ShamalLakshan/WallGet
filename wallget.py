@@ -5,9 +5,10 @@ import string
 
 resolution = "1920x1080"
 path = "./images/"
+aspect_ratio = "16x9"
 
 def wall_search_api(keyword, pagination, category):
-    url = f"https://wallhaven.cc/api/v1/search?q={keyword}&page={pagination}&categories={category}&atleast={resolution}"
+    url = f"https://wallhaven.cc/api/v1/search?q={keyword}&page={pagination}&categories={category}&ratios={aspect_ratio}"
     res = requests.get(url)
     json_data = res.json()
     dl_links = []
@@ -47,8 +48,8 @@ def main():
 
     if pagination == "":
         pagination = 1
-    if category == "":
-        category == 0
+    elif category == "anime":
+        category = "010"
 
     waldlurl = wall_search_api(keyword, pagination, category)
     for url in waldlurl:
